@@ -1,5 +1,7 @@
 import logging, pytz
 import logging.config
+from datetime import date, datetime 
+
 
 # Get logging configurations
 logging.config.fileConfig('logging.conf')
