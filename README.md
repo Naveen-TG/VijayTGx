@@ -63,6 +63,15 @@ You can deploy this bot anywhere.
 </p>
 </details>
 
+<details><summary>Deploy To Koyeb</summary>
+<br>
+<b>The fastest way to deploy the application is to click the Deploy to Koyeb button below.</b>
+<br>
+<br>
+
+[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&repository=github.com/Naveen-TG/VijayTGe&branch=main&name=jiraiya)
+</details>
+
 <details><summary>Deploy To VPS</summary>
 <p>
 <pre>
