@@ -28,14 +28,30 @@ logger.setLevel(logging.ERROR)
 
 BUTTONS = {}
 SPELL_CHECK = {}
+FILTER_MODE = {}
 
+@Client.on_message(filters.command('autofilter'))
+async def fil_mod(client, message):
+      mode_on = ["yes", "on", "true"]
+      mode_of = ["no", "off", "false"]
 
-@Client.on_message(filters.group & filters.text & filters.incoming)
-async def give_filter(client, message):
-    k = await manual_filters(client, message)
-    if k == False:
-        await auto_filter(client, message)
+      try:
+         args = message.text.split(None, 1)[1].lower()
+      except:
+         return await message.reply("Command is incomplete.")
 
+      m = await message.reply("Processing...")
+
+      if args in mode_on:
+          FILTER_MODE[str(message.chat.id)] = "True"
+          await m.edit("Auto filter enabled for this chat")
+
+      elif args in mode_of:
+          FILTER_MODE[str(message.chat.id)] = "False"
+          await m.edit("Auto filter disabled for this chat")
+      else:
+          await m.edit("Use: `/autofilter on` or `/autofilter off`")
+          
 
 @Client.on_callback_query(filters.regex(r"^next"))
 async def next_page(bot, query):
