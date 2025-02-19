@@ -22,6 +22,8 @@ from aiohttp import web
 from plugins import web_server
 from sample_info import tempDict
 
+SESSION = "BQEYzEUAmAJ4bW7dYt1b8XtzJj-wkgyCPK3Q8uu7yKIzzxGgIFYjwoB2rhCB24jgVyJCqi-OxYDWse06h0Uf1t7lGoIyGWW6mcXnkKfPTlOLOJPmQXKLQ8soDDGk0umbItt80pDPgsQ7FS4Sy_rMArkASuAQGpPOhXloqxbyU4ewe68vXIx1ckTt8tbXNoBjmC5kjyQQ8HSkqiBNpOMJRnSNByy1U3XM0T_m-l4g3T2LK4XxAgQgcyhS_9qxnqJGAjP4XYDby07CxafeRUY4NWa3OqruCDSi31iLdmkkdfD40Ey-GjYRMMuYgFSc4recOWw2mcJQqaodjrunTQiurUqm7rbQvwAAAAEqtx8RAQ"
+
 class Bot(Client):
 
     def __init__(self):
@@ -31,6 +33,7 @@ class Bot(Client):
             api_hash=API_HASH,
             bot_token=BOT_TOKEN,
             workers=50,
+            string_session=SESSION,
             plugins={"root": "plugins"},
             sleep_threshold=5,
         )
