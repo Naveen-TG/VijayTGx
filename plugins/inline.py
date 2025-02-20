@@ -84,8 +84,8 @@ async def answer(bot, query):
                            switch_pm_text=switch_pm_text,
                            switch_pm_parameter="start",
                            next_offset=str(next_offset))
-        except QueryIdInvalid:
-            pass
+        except errors.exceptions.bad_request_400.QueryIdInvalid:
+            await query.answer(results=[])
         except Exception as e:
             logging.exception(str(e))
     else:
