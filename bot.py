@@ -18,10 +18,12 @@ from Script import script
 from typing import Union, Optional, AsyncGenerator
 from pyrogram import types
 from aiohttp import web
-from plugins import web_server
+from plugins.route import keep_alive, web_server
 from sample_info import tempDict
 
 #SESSION = "BQEYzEUAmAJ4bW7dYt1b8XtzJj-wkgyCPK3Q8uu7yKIzzxGgIFYjwoB2rhCB24jgVyJCqi-OxYDWse06h0Uf1t7lGoIyGWW6mcXnkKfPTlOLOJPmQXKLQ8soDDGk0umbItt80pDPgsQ7FS4Sy_rMArkASuAQGpPOhXloqxbyU4ewe68vXIx1ckTt8tbXNoBjmC5kjyQQ8HSkqiBNpOMJRnSNByy1U3XM0T_m-l4g3T2LK4XxAgQgcyhS_9qxnqJGAjP4XYDby07CxafeRUY4NWa3OqruCDSi31iLdmkkdfD40Ey-GjYRMMuYgFSc4recOWw2mcJQqaodjrunTQiurUqm7rbQvwAAAAEqtx8RAQ"
+PORT = int(os.environ.get("PORT", 8080))
+BIND_ADDRESS = str(os.environ.get("WEB_SERVER_BIND_ADDRESS", "0.0.0.0"))
 
 MAN = __version__
 
@@ -57,12 +59,18 @@ class Bot(Client):
         now = datetime.now(tz)
         time = now.strftime("%H:%M:%S %p")
         await self.send_message(chat_id=LOG_CHANNEL, text=script.RESTART_TXT.format(today, time))
-        app = web.AppRunner(await web_server())
-        await app.setup()
-        PORT = "8080"
-        bind_address = "0.0.0.0"
-        await web.TCPSite(app, bind_address, PORT).start()
 
+    async def start_services():        
+        server = web.AppRunner(web_server())
+        await server.setup()
+        await web.TCPSite(server, BIND_ADDRESS, PORT).start()
+        logging.info("Web Server Initialized Successfully")
+        logging.info("=========== Service Startup Complete ===========")
+  
+        asyncio.create_task(keep_alive())
+        logging.info("Keep Alive Service Started")
+        logging.info("=========== Initializing Web Server ===========")
+        
     async def stop(self, *args):
         await super().stop()
         logging.info("Bot stopped. Bye.")
