@@ -69,7 +69,7 @@ async def send_for_index(bot, message):
         return
     
 try:
-    await bot.get_chat(chat_id)
+    await client.get_chat(chat_id)
     return
 except (ChannelInvalid, UsernameInvalid, UsernameNotModified) as e:
     if isinstance(e, ChannelInvalid):
