@@ -70,6 +70,7 @@ async def send_for_index(bot, message):
     
 try:
     await bot.get_chat(chat_id)
+    return
 except (ChannelInvalid, UsernameInvalid, UsernameNotModified) as e:
     if isinstance(e, ChannelInvalid):
         return await message.reply('This may be a private channel / group. Make me an admin over there to index the files.')
