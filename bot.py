@@ -116,10 +116,10 @@ async def start_services():
     logging.info("Keep Alive Service Started")
     logging.info("=========== Initializing Web Server ===========")
 
-app = Bot()
-Bot.run()
+
 
 if __name__ == "__main__":
+     app = Bot()
      loop = asyncio.get_event_loop()
-     loop.run_until_complete(start_services())
+     loop.run_until_complete(start_services(), Bot.run())
      log.info('Bot Started!')
