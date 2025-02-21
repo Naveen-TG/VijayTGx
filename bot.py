@@ -60,17 +60,6 @@ class Bot(Client):
         time = now.strftime("%H:%M:%S %p")
         await self.send_message(chat_id=LOG_CHANNEL, text=script.RESTART_TXT.format(today, time))
 
-    async def start_services():        
-        server = web.AppRunner(web_server())
-        await server.setup()
-        await web.TCPSite(server, BIND_ADDRESS, PORT).start()
-        logging.info("Web Server Initialized Successfully")
-        logging.info("=========== Service Startup Complete ===========")
-  
-        asyncio.create_task(keep_alive())
-        logging.info("Keep Alive Service Started")
-        logging.info("=========== Initializing Web Server ===========")
-        
     async def stop(self, *args):
         await super().stop()
         logging.info("Bot stopped. Bye.")
@@ -116,6 +105,17 @@ class Bot(Client):
 
 
         
+async def start_services():        
+    server = web.AppRunner(web_server())
+    await server.setup()
+    await web.TCPSite(server, BIND_ADDRESS, PORT).start()
+    logging.info("Web Server Initialized Successfully")
+    logging.info("=========== Service Startup Complete ===========")
+  
+    asyncio.create_task(keep_alive())
+    logging.info("Keep Alive Service Started")
+    logging.info("=========== Initializing Web Server ===========")
+
 app = Bot()
 
 if __name__ == "__main__":
