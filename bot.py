@@ -118,8 +118,5 @@ async def start_services():
 
 
 
-if __name__ == "__main__":
-     app = Bot()
-     loop = asyncio.get_event_loop()
-     loop.run_until_complete(start_services(), Bot.run())
-     log.info('Bot Started!')
+app = Bot()
+app.run()
