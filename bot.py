@@ -103,8 +103,10 @@ class Bot(Client):
                 yield message
                 current += 1
 
+app = Bot((
+app.run()
 
-        
+
 async def start_services():        
     server = web.AppRunner(web_server())
     await server.setup()
@@ -121,6 +123,5 @@ async def start_services():
 if __name__ == "__main__":
      loop = asyncio.get_event_loop()
      loop.run_until_complete(start_services())
-     Bot.run()
-     log.info('Bot Started!')
+     logging.info('Bot Started!')
     
