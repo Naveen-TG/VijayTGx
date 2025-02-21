@@ -115,5 +115,11 @@ class Bot(Client):
                 current += 1
 
 
+        
 app = Bot()
-app.run()
+
+if __name__ == "__main__":
+     loop = asyncio.get_event_loop()
+     loop.run_until_complete(start_services())
+     Bot.run()
+     log.info('Bot Started!')
