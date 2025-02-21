@@ -67,15 +67,19 @@ async def send_for_index(bot, message):
             chat_id = message.forward_from_chat.username or message.forward_from_chat.id
     else:
         return
-    try:
-        await bot.get_chat(chat_id)
-    except ChannelInvalid:
+    
+try:
+    await bot.get_chat(chat_id)
+except (ChannelInvalid, UsernameInvalid, UsernameNotModified) as e:
+    if isinstance(e, ChannelInvalid):
         return await message.reply('This may be a private channel / group. Make me an admin over there to index the files.')
-    except (UsernameInvalid, UsernameNotModified):
+    else:
         return await message.reply('Invalid Link specified.')
-    except Exception as e:
-        logger.exception(e)
-        return await message.reply(f'Errors - {e}')
+except Exception as e:
+    logger.exception(e)
+    return await message.reply(f'Errors - {e}')
+
+# Continue with your logic here
     try:
         k = await bot.get_messages(chat_id, last_msg_id)
     except:
