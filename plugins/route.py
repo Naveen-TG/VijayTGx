@@ -1,4 +1,4 @@
-WEB_URL = "https://hot-lucita-jiraiya-cd68c555.koyeb.app/"
+WEB_URL = "https://vijaytgx.onrender.com"
 WEB_SLLEP = 3*60
 
 from aiohttp import web
