@@ -1,6 +1,6 @@
 # imports
 aiohttp
-pyrotgfork
+pyrogram
 tgcrypto
 pymongo==4.1
 motor==3.1.1
